@@ -1,0 +1,4 @@
+enemySpeed = 1
+spawnRate = 80
+playerHealth = 120
+bonusChance = 10
