@@ -1,28 +1,45 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <SFML/Graphics.hpp>
 #include <vector>
-#include <memory>
-#include "GameObject.h"
-#include "ConfigManager.h"
+#include <string>
 
-class Game {
+class Game
+{
 private:
-    std::vector<std::unique_ptr<GameObject>> objects;
-    ConfigManager config;
+    sf::RenderWindow window;
 
-    bool running;
+    sf::ConvexShape player;
+    std::vector<sf::ConvexShape> enemies;
+    std::vector<sf::RectangleShape> bullets;
+
     int score;
-    int frameCounter;
+    int health;
+    int maxHealth;
+
+    float enemySpeed;
+    float enemySpawnDelay;
+    float enemySpawnTimer;
+
+    bool difficultySelected;
+
+    void processEvents();
+    void update(float deltaTime);
+    void render();
+
+    void selectDifficulty();
+    void createPlayer();
+    void spawnEnemy();
+    void shoot();
+    void updateTitle();
+    void drawHearts();
+    sf::Font font;
+    sf::Text scoreText;
 
 public:
     Game();
-
     void run();
-    void update();
-    void draw();
-    void spawnEnemy();
-    void spawnBonus();
 };
 
 #endif
